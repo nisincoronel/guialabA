@@ -12,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GuíaLab - Pre-Analítica</title>
+    <title>GuíaLab | Formación y Pre-Analítica</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     
@@ -28,8 +28,10 @@
 
     <div class="app-container">
         <header>
+            <img class="brand-logo" src="logo-guialab.png" alt="GuíaLab Formación y capacitación continua">
+            <p class="eyebrow"><i class="fas fa-graduation-cap"></i> cc </p>
             <h1>GuíaLab Pre-Analítica</h1>
-            <p><i class="fas fa-map-marker-alt"></i> Manual de Gestión Beta 1.8 | Posadas, Misiones</p>
+            <p><i class="fas fa-map-marker-alt"></i> Version 2.0 | Posadas, Misiones</p>
         </header>
 
         <div id="pedido-status" class="pedido-container" style="display: none;">
@@ -49,7 +51,30 @@
             </div>
         </div>
 
-        <section class="search-section">
+        <section class="learning-hub" id="learningHub" aria-labelledby="learningTitle">
+            <div class="learning-hub__intro">
+                <span class="learning-hub__icon"><i class="fas fa-flask"></i></span>
+                <div>
+                    <p class="section-kicker">Modo estudiante</p>
+                    <h2 id="learningTitle">Aprendé la pre-analítica, paso a paso</h2>
+                    <p>Elegí un sector o buscá un estudio. En cada ficha vas a encontrar la preparación del paciente y el manejo técnico de la muestra.</p>
+                </div>
+            </div>
+            <div class="study-steps" aria-label="Cómo usar GuíaLab">
+                <div><span>1</span><strong>Buscá</strong><small>un análisis o código</small></div>
+                <div><span>2</span><strong>Reconocé</strong><small>muestra y tubo</small></div>
+                <div><span>3</span><strong>Verificá</strong><small>el procesamiento</small></div>
+            </div>
+            <div class="quick-sectors" aria-label="Accesos rápidos por sector">
+                <button type="button" data-sector="Hematología">🔬 Hematología</button>
+                <button type="button" data-sector="Hemostasia">🩸 Hemostasia</button>
+                <button type="button" data-sector="Química clínica">🧪 Química clínica</button>
+                <button type="button" data-sector="Microbiología">🧫 Microbiología</button>
+            </div>
+            <p class="clinical-note"><i class="fas fa-circle-info"></i> Material de apoyo para formación. Validá siempre el procedimiento vigente con la dirección técnica y el protocolo de tu institución.</p>
+        </section>
+
+        <section class="search-section" aria-label="Buscar estudios">
             <div class="input-group">
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Buscar determinación o análisis...">
@@ -72,7 +97,8 @@
             </div>
         </section>
 
-        <ul id="examList"></ul>
+        <p id="resultsSummary" class="results-summary" aria-live="polite"></p>
+        <ul id="examList" aria-label="Resultados de estudios"></ul>
 
         <div id="modal" class="modal">
             <div class="modal-content">

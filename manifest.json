@@ -1,11 +1,11 @@
 {
   "name": "GuíaLab Pre-Analítica",
   "short_name": "GuíaLab",
-  "description": "Buscador de determinaciones de laboratorio en Posadas, Misiones.",
+  "description": "Guía de formación y consulta pre-analítica para estudiantes de laboratorio.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f7f6",
-  "theme_color": "#3498db",
+  "background_color": "#f8fafc",
+  "theme_color": "#0284c7",
   "orientation": "portrait",
   "icons": [
     {

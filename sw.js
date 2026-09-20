@@ -1,48 +1,42 @@
-// 1. CAMBIAMOS A V2:
-const CACHE_NAME = 'guialab-cache-v2';
+const CACHE_NAME = 'guialab-cache-v3';
 
-const assets = [
+const APP_ASSETS = [
   './',
   './index.html',
   './style.css',
   './script.js',
   './manifest.json',
+  './logo-guialab.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
-// Instalación: Guarda los archivos en el dispositivo
 self.addEventListener('install', event => {
-  // Fuerza al nuevo Service Worker a activarse inmediatamente sin esperar a que se cierre la app
-  self.skipWaiting(); 
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('Cache OK: Archivos guardados en v2');
-      return cache.addAll(assets);
-    })
-  );
+  self.skipWaiting();
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_ASSETS)));
 });
 
-// Activación: Borra automáticamente el caché viejo (v1) gracias a tu lógica
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cache => {
-          if (cache !== CACHE_NAME) {
-            console.log('Limpiando versiones antiguas (Adiós v1)');
-            return caches.delete(cache);
-          }
-        })
-      );
-    }).then(() => self.clients.claim()) // Toma el control de la app al toque
+    caches.keys()
+      .then(names => Promise.all(names.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))))
+      .then(() => self.clients.claim())
   );
 });
 
-// Fetch: Carga desde el caché si no hay conexión
+// Con conexión, prioriza siempre la versión publicada más reciente.
+// Sin conexión, devuelve la última versión disponible en el dispositivo.
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then(response => {
+        if (response.ok && new URL(event.request.url).origin === self.location.origin) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
   );
 });
