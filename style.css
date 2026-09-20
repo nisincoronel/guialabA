@@ -1,0 +1,385 @@
+:root {
+    --primary: #0284c7; /* Azul clínico más moderno */
+    --dark: #1e293b;    /* Gris pizarra oscuro premium */
+    --light-bg: #f8fafc; /* Fondo general ultra limpio */
+    --white: #ffffff;
+    --whatsapp: #25d366;
+    --gray-border: #e2e8f0;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    padding: 20px;
+    color: var(--dark);
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+header h1 {
+    margin: 0 0 4px 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.025em;
+}
+
+header p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* --- Sistema de Pedido y WhatsApp Estilo Flotante --- */
+.pedido-container {
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 14px 18px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    display: none; 
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 15px;
+    z-index: 10;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-ws { 
+    background: var(--whatsapp); 
+    color: white; 
+    border: none; 
+    padding: 10px 18px; 
+    border-radius: 10px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.2s;
+}
+.btn-ws:hover { background: #20ba5a; transform: translateY(-1px); }
+
+.btn-clear { 
+    background: #ef4444; 
+    color: white; 
+    border: none; 
+    padding: 10px 14px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    margin-left: 5px; 
+    transition: all 0.2s;
+}
+.btn-clear:hover { background: #dc2626; }
+
+/* --- Buscador y Filtro Modernizados --- */
+.search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.input-group, .select-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group i {
+    position: absolute;
+    left: 16px;
+    color: #94a3b8;
+    font-size: 1.05rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px 14px 14px 44px;
+    border: 1px solid var(--gray-border);
+    border-radius: 14px;
+    font-size: 16px; 
+    color: var(--dark);
+    background-color: var(--white);
+    outline: none;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+}
+
+select {
+    padding-left: 16px; /* Ajuste para el select que no lleva ícono interno a la izquierda */
+    cursor: pointer;
+}
+
+/* --- Lista de Resultados Estilo Tarjeta --- */
+#examList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#examList li {
+    background: var(--white);
+    margin-bottom: 12px;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    border: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+#examList li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    border-color: #e2e8f0;
+}
+
+/* Indicadores de Color de Tubo Estrictos */
+.wrapper-izquierdo {
+    display: flex;
+    align-items: center;
+}
+
+.tubo-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 14px;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+/* Clases inyectadas por JS para pintar los tubos en la lista */
+.color-rojo { background-color: #dc2626; }
+.color-lila { background-color: #a855f7; }
+.color-celeste { background-color: #0ea5e9; }
+.color-negro { background-color: #1e293b; }
+.color-verde { background-color: #22c55e; }
+.color-esteril { background-color: #f59e0b; border: 2px solid #3b82f6 !important; }
+
+/* Badges de Urgencia en la lista */
+.badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+.urgencia-alta { background: #fee2e2; color: #991b1b; }
+.urgencia-media { background: #fef9c3; color: #854d0e; }
+.urgencia-baja { background: #dcfce7; color: #166534; }
+
+/* --- Ventana Modal Transformada (Diseño Clínico) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--white);
+    padding: 24px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    font-size: 24px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close:hover { color: var(--dark); }
+
+/* Estructura Interna del Modal */
+.modal-header-analisis {
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+.modal-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0 0 4px 0;
+}
+.modal-sector {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.seccion-modal-paciente {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+}
+.seccion-modal-tecnico {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 20px;
+}
+.modal-subtitulo {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 6px 0;
+}
+.modal-subtitulo.paciente { color: #166534; }
+.modal-subtitulo.tecnico { color: #334155; }
+
+.modal-texto {
+    font-size: 0.9rem;
+    color: #334155;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- Footer Profesional --- */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    font-size: 0.85rem;
+    color: #64748b;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+footer strong {
+    display: block;
+    color: var(--dark);
+    font-size: 1.05rem;
+    margin-top: 2px;
+}
+
+.footer-tag {
+    margin-top: 4px;
+    color: var(--primary);
+    font-weight: 700;
+}
+/* --- Sistema de Pestañas (Tabs) para el Modal --- */
+.modal-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: #f1f5f9;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Pestaña Paciente Activa (Verde Clínico) */
+.tab-btn.active.tab-paciente {
+    background-color: #22c55e;
+    color: white;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+}
+
+/* Pestaña Técnico Activa (Azul Institucional) */
+.tab-btn.active.tab-tecnico {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+}
+
+/* Contenedores de contenido (se ocultan/muestran por JS) */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.25s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Ajuste para el botón de agregar pedido dentro del modal */
+.btn-whatsapp-premium {
+    width: 100%;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+.btn-whatsapp-premium:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}

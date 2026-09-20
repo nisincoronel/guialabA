@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0PN3C9FFQS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0PN3C9FFQS');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GuíaLab - Pre-Analítica</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>GuíaLab Pre-Analítica</h1>
+            <p><i class="fas fa-map-marker-alt"></i> Manual de Gestión Beta 1.8 | Posadas, Misiones</p>
+        </header>
+
+        <div id="pedido-status" class="pedido-container" style="display: none;">
+            <span><i class="fas fa-clipboard-list"></i> Pedido: <strong id="contador-pedido">0</strong></span>
+            <div>
+                <button onclick="enviarWhatsApp()" class="btn-ws" title="Enviar por WhatsApp">
+                    <i class="fab fa-whatsapp"></i> Enviar
+                </button>
+                
+                <button onclick="descargarTXT()" class="btn-txt" style="background: #0284c7; color: white; border: none; padding: 10px 14px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-right: 4px; transition: background 0.2s;" title="Descargar indicaciones en TXT">
+                    <i class="fas fa-file-download"></i> TXT
+                </button>
+                
+                <button onclick="vaciarPedido()" class="btn-clear" title="Vaciar Pedido">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <section class="search-section">
+            <div class="input-group">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar determinación o análisis...">
+            </div>
+            
+            <div class="select-group">
+                <select id="areaSelect">
+                    <option value="">🔬 Todos los sectores</option>
+                    <option value="Hematología">🔬 Hematología</option>
+                    <option value="Hemostasia">🩸 Hemostasia</option>
+                    <option value="Microbiología">🧫 Microbiología</option>
+                    <option value="Química clínica">🧪 Química Clínica</option> 
+                    <option value="Endocrinología">🧬 Endocrinología</option>
+                    <option value="Serología">💉 Serología</option>
+                    <option value="Orina">🚽 Orina</option>
+                    <option value="Parasitología">🦠 Parasitología</option>
+                    <option value="Pesquisa Neonatal">🐰 Pesquisa Neonatal</option>
+                    <option value="Autoinmunidad">🧩 Autoinmunidad</option>
+                </select>
+            </div>
+        </section>
+
+        <ul id="examList"></ul>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <div id="modalData"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Desarrollado por:</p>
+            <strong>Nisin Coronel</strong>
+            <span>Técnico Superior en Lab. Químico Biológico</span>
+            <div class="footer-tag">Posadas, Misiones | 2026</div>
+            
+            <a href="https://wa.me/+5493765127562" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="text-decoration: none; background: #25d366; color: white; padding: 12px 24px; border-radius: 25px; font-size: 0.85em; display: inline-block; margin-top: 18px; font-weight: bold; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.25); transition: all 0.2s;">
+                <i class="fab fa-whatsapp"></i> Consultas Profesionales
+            </a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('✅ GuíaLab Offline Activo'))
+                    .catch(err => console.log('❌ Error Service Worker', err));
+            });
+        }
+    </script>
+</body>
+</html>
