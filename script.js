@@ -56,6 +56,9 @@ async function cargarDeterminaciones() {
         }
 
         const datos = await response.json();
+        
+        console.log("JSON cargado:", datos);
+console.log("Cantidad:", datos.length);
 
         if (!Array.isArray(datos)) {
             throw new Error("El JSON no contiene una lista de determinaciones.");
