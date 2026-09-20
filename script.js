@@ -47,7 +47,7 @@ function filaDato(etiqueta, valor) {
 
 async function cargarDeterminaciones() {
     try {
-        const response = await fetch("datos/determinaciones.json", {
+        const response = await fetch("determinaciones.json", {
             cache: "no-store"
         });
 
