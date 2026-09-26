@@ -4,8 +4,8 @@
   "description": "Guía de formación y consulta pre-analítica para estudiantes de laboratorio.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#0284c7",
+  "background_color": "#f5f8f2",
+  "theme_color": "#07512f",
   "orientation": "portrait",
   "icons": [
     {

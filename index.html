@@ -11,7 +11,7 @@
   gtag('config', 'G-0PN3C9FFQS');
 </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>GuíaLab | Formación y Pre-Analítica</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
@@ -22,16 +22,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#07512f">
 </head>
 <body>
 
     <div class="app-container">
-        <header>
-            <img class="brand-logo" src="logo-guialab.png" alt="GuíaLab Formación y capacitación continua">
-            <p class="eyebrow"><i class="fas fa-graduation-cap"></i> cc </p>
-            <h1>GuíaLab Pre-Analítica</h1>
-            <p><i class="fas fa-map-marker-alt"></i> Version 2.0 | Posadas, Misiones</p>
+        <header class="dashboard-header" id="inicio">
+            <div class="dashboard-topline">
+                <div class="brand-mini brand-full-logo">
+                    <img class="brand-logo" src="logo-guialab.png" alt="GuíaLab · Formación y capacitación continua">
+                </div>
+                <span class="online-pill"><i class="fas fa-circle"></i> Activo</span>
+            </div>
+            <div class="dashboard-welcome">
+                <div>
+                    <p class="eyebrow">Panel profesional</p>
+                    <h1>Tu guía de laboratorio, <span>en un solo lugar.</span></h1>
+                    <p>Consultá determinaciones, muestras, tubos y condiciones pre-analíticas rápidamente.</p>
+                </div>
+                <div class="header-symbol"><i class="fas fa-microscope"></i></div>
+            </div>
+            <div class="dashboard-stats" aria-label="Resumen de GuíaLab">
+                <div><i class="fas fa-flask"></i><strong id="statDeterminaciones">—</strong><small>determinaciones</small></div>
+                <div><i class="fas fa-layer-group"></i><strong id="statSectores">10</strong><small>sectores</small></div>
+                <div><i class="fas fa-wifi"></i><strong>OFFLINE</strong><small>modo disponible</small></div>
+            </div>
         </header>
 
         <div id="pedido-status" class="pedido-container" style="display: none;">
@@ -41,7 +57,7 @@
                     <i class="fab fa-whatsapp"></i> Enviar
                 </button>
                 
-                <button onclick="descargarTXT()" class="btn-txt" style="background: #0284c7; color: white; border: none; padding: 10px 14px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-right: 4px; transition: background 0.2s;" title="Descargar indicaciones en TXT">
+                <button onclick="descargarTXT()" class="btn-txt" title="Descargar indicaciones en TXT">
                     <i class="fas fa-file-download"></i> TXT
                 </button>
                 
@@ -51,30 +67,88 @@
             </div>
         </div>
 
-        <section class="learning-hub" id="learningHub" aria-labelledby="learningTitle">
-            <div class="learning-hub__intro">
-                <span class="learning-hub__icon"><i class="fas fa-flask"></i></span>
+        <section class="learning-hub dashboard-panel" id="learningHub" aria-labelledby="learningTitle">
+            <div class="panel-heading">
                 <div>
-                    <p class="section-kicker">Modo estudiante</p>
-                    <h2 id="learningTitle">Aprendé la pre-analítica, paso a paso</h2>
-                    <p>Elegí un sector o buscá un estudio. En cada ficha vas a encontrar la preparación del paciente y el manejo técnico de la muestra.</p>
+                    <p class="section-kicker">Acceso rápido</p>
+                    <h2 id="learningTitle">¿Qué necesitás consultar?</h2>
                 </div>
+                <span class="panel-icon"><i class="fas fa-bolt"></i></span>
             </div>
-            <div class="study-steps" aria-label="Cómo usar GuíaLab">
-                <div><span>1</span><strong>Buscá</strong><small>un análisis o código</small></div>
-                <div><span>2</span><strong>Reconocé</strong><small>muestra y tubo</small></div>
-                <div><span>3</span><strong>Verificá</strong><small>el procesamiento</small></div>
+            <div class="dashboard-actions" aria-label="Acciones rápidas">
+                <button type="button" data-sector="Hematología"><span><i class="fas fa-droplet"></i></span><strong>Hematología</strong><small>Hemograma y más</small></button>
+                <button type="button" data-sector="Hemostasia"><span><i class="fas fa-vial"></i></span><strong>Hemostasia</strong><small>Coagulación</small></button>
+                <button type="button" data-sector="Química clínica"><span><i class="fas fa-flask"></i></span><strong>Química clínica</strong><small>Suero y plasma</small></button>
+                <button type="button" data-sector="Microbiología"><span><i class="fas fa-bacterium"></i></span><strong>Microbiología</strong><small>Cultivos y muestras</small></button>
             </div>
-            <div class="quick-sectors" aria-label="Accesos rápidos por sector">
-                <button type="button" data-sector="Hematología">🔬 Hematología</button>
-                <button type="button" data-sector="Hemostasia">🩸 Hemostasia</button>
-                <button type="button" data-sector="Química clínica">🧪 Química clínica</button>
-                <button type="button" data-sector="Microbiología">🧫 Microbiología</button>
+            <button type="button" class="dashboard-guide" id="studentModeButton" aria-pressed="false">
+                <span class="guide-icon"><i class="fas fa-graduation-cap"></i></span>
+                <span class="guide-copy"><strong>Modo estudiante</strong><span>Activá una vista pensada para estudiar: preparación, muestra, tubo y procesamiento.</span></span>
+                <span class="guide-toggle"><i class="fas fa-toggle-off"></i></span>
+            </button>
+            <a class="challenge-card" href="game.html" aria-label="Abrir Desafío GuíaLab">
+                <span class="challenge-orbit challenge-orbit-one"></span>
+                <span class="challenge-orbit challenge-orbit-two"></span>
+                <span class="challenge-icon"><i class="fas fa-gamepad"></i></span>
+                <span class="challenge-copy">
+                    <span class="challenge-kicker"><i class="fas fa-sparkles"></i> Desafío GuíaLab</span>
+                    <strong>Convertí el estudio en un juego</strong>
+                    <small>Preguntas dinámicas sobre las determinaciones reales.</small>
+                </span>
+                <span class="challenge-action">Jugar <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <section class="utilities-card" id="utilidades" aria-labelledby="utilitiesTitle">
+                <div class="utilities-heading">
+                    <span class="utilities-icon"><i class="fas fa-calculator"></i></span>
+                    <div>
+                        <p class="section-kicker">Utilidades</p>
+                        <h3 id="utilitiesTitle">Calculadora de diluciones</h3>
+                        <p>Prepará diluciones generales o seriadas sin conversiones manuales.</p>
+                    </div>
+                </div>
+                <div class="dilution-tabs" role="tablist" aria-label="Tipo de cálculo">
+                    <button type="button" class="dilution-tab is-active" role="tab" aria-selected="true" aria-controls="generalCalculator" id="generalTab" data-dilution-tab="generalCalculator">Dilución general</button>
+                    <button type="button" class="dilution-tab" role="tab" aria-selected="false" aria-controls="serialCalculator" id="serialTab" data-dilution-tab="serialCalculator">Seriada</button>
+                </div>
+                <div class="dilution-panel" id="generalCalculator" role="tabpanel" aria-labelledby="generalTab">
+                    <div class="calculation-choice">
+                        <label><input type="radio" name="dilutionMode" value="final" checked> Preparar un volumen final</label>
+                        <label><input type="radio" name="dilutionMode" value="available"> Diluir un volumen disponible</label>
+                    </div>
+                    <div class="dilution-grid">
+                        <label>Concentración inicial (C₁)<input id="initialConcentration" inputmode="decimal" type="number" min="0" step="any" placeholder="Ej. 10"></label>
+                        <label>Concentración final (C₂)<input id="finalConcentration" inputmode="decimal" type="number" min="0" step="any" placeholder="Ej. 2"></label>
+                        <label id="volumeLabel">Volumen final deseado (V₂)<span class="input-with-unit"><input id="targetVolume" inputmode="decimal" type="number" min="0" step="any" placeholder="Ej. 5"><select id="generalVolumeUnit" aria-label="Unidad de volumen"><option>mL</option><option>µL</option><option>L</option></select></span></label>
+                    </div>
+                    <p class="calculator-hint">Usá la misma unidad de concentración en C₁ y C₂. Fórmula: C₁ × V₁ = C₂ × V₂.</p>
+                    <button type="button" class="calculate-button" id="calculateGeneral"><i class="fas fa-flask"></i> Calcular dilución</button>
+                    <div class="calculation-result" id="generalResult" aria-live="polite" hidden></div>
+                </div>
+                <div class="dilution-panel" id="serialCalculator" role="tabpanel" aria-labelledby="serialTab" hidden>
+                    <div class="dilution-grid serial-grid">
+                        <label>Concentración inicial<input id="serialConcentration" inputmode="decimal" type="number" min="0" step="any" placeholder="Ej. 1000"></label>
+                        <label>Dilución por paso (1 : x)<input id="serialFactor" inputmode="decimal" type="number" min="1" step="any" placeholder="Ej. 10"></label>
+                        <label>Cantidad de tubos<input id="serialSteps" inputmode="numeric" type="number" min="1" max="50" step="1" placeholder="Ej. 5"></label>
+                        <label>Volumen final por tubo<span class="input-with-unit"><input id="serialVolume" inputmode="decimal" type="number" min="0" step="any" placeholder="Ej. 1"><select id="serialVolumeUnit" aria-label="Unidad de volumen por tubo"><option>mL</option><option>µL</option><option>L</option></select></span></label>
+                    </div>
+                    <p class="calculator-hint">Cada tubo se prepara con una fracción de la dilución anterior y diluyente hasta completar el volumen indicado.</p>
+                    <button type="button" class="calculate-button" id="calculateSerial"><i class="fas fa-table"></i> Generar tabla</button>
+                    <div class="serial-result" id="serialResult" aria-live="polite" hidden></div>
+                </div>
+            </section>
+            <div id="studentModePanel" class="student-mode-panel" hidden>
+                <div class="student-mode-title"><i class="fas fa-book-medical"></i><strong>Modo estudiante activado</strong></div>
+                <div class="student-mode-grid">
+                    <div><b>1</b><span>Buscá una determinación</span></div>
+                    <div><b>2</b><span>Revisá preparación y ayuno</span></div>
+                    <div><b>3</b><span>Identificá muestra y tubo</span></div>
+                    <div><b>4</b><span>Estudiá el procesamiento</span></div>
+                </div>
             </div>
             <p class="clinical-note"><i class="fas fa-circle-info"></i> Material de apoyo para formación. Validá siempre el procedimiento vigente con la dirección técnica y el protocolo de tu institución.</p>
         </section>
 
-        <section class="search-section" aria-label="Buscar estudios">
+        <section class="search-section" id="buscar" aria-label="Buscar estudios">
             <div class="input-group">
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Buscar determinación o análisis...">
@@ -112,17 +186,49 @@
             <strong>Nisin Coronel</strong>
             <span>Técnico Superior en Lab. Químico Biológico</span>
             <div class="footer-tag">Posadas, Misiones | 2026</div>
+            <div class="visit-counter" aria-label="Contador de visitas">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+                <span>Visitas únicas:</span>
+                <span class="counterapi" ns="guialab-nisin-2026" action="view" key="inicio" unique="true" label="" noCss="true" noIcon="true" noLink="true" noAnim="true" style="min-height: 20px"></span>
+            </div>
             
             <a href="https://wa.me/+5493765127562" 
                target="_blank" 
                rel="noopener noreferrer" 
-               style="text-decoration: none; background: #25d366; color: white; padding: 12px 24px; border-radius: 25px; font-size: 0.85em; display: inline-block; margin-top: 18px; font-weight: bold; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.25); transition: all 0.2s;">
-                <i class="fab fa-whatsapp"></i> Consultas Profesionales
+               class="footer-contact">
+                <i class="fab fa-whatsapp"></i> Consultas profesionales
             </a>
         </footer>
     </div>
 
+    <nav class="mobile-bottom-nav" aria-label="Navegación rápida">
+        <a href="#inicio" class="mobile-nav-item active" data-nav="inicio"><i class="fas fa-house"></i><span>Inicio</span></a>
+        <a href="#buscar" class="mobile-nav-item" data-nav="buscar"><i class="fas fa-magnifying-glass"></i><span>Buscar</span></a>
+        <a href="#learningHub" class="mobile-nav-item" data-nav="estudiar"><i class="fas fa-graduation-cap"></i><span>Estudiar</span></a>
+        <a href="#pedido-status" class="mobile-nav-item" data-nav="pedido"><i class="fas fa-clipboard-list"></i><span>Pedido</span></a>
+    </nav>
+
     <script src="script.js"></script>
+    <script src="dilution.js"></script>
+    <script src="https://counterapi.com/c.js" async></script>
+    <script>
+        // Navegación móvil: mantiene una experiencia tipo app sin alterar la lógica existente.
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                if (item.dataset.nav === 'buscar') {
+                    setTimeout(() => document.getElementById('searchInput')?.focus({ preventScroll: true }), 180);
+                }
+                if (item.dataset.nav === 'pedido') {
+                    const pedido = document.getElementById('pedido-status');
+                    if (pedido && getComputedStyle(pedido).display === 'none') {
+                        document.getElementById('examList')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
 
     <script>
         if ('serviceWorker' in navigator) {
