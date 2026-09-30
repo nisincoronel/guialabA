@@ -1501,6 +1501,10 @@ footer { border-color:#dbe7d9; background:rgba(255,255,255,.75); }
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
 
     text-decoration: none;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+   
 
     transition:
         transform 0.2s ease,
@@ -1511,7 +1515,9 @@ footer { border-color:#dbe7d9; background:rgba(255,255,255,.75); }
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
 }
-
+.matecito-flotante:active {
+    cursor: grabbing;
+}
 .matecito-icon {
     width: 34px;
     height: 34px;
