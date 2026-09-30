@@ -265,5 +265,62 @@
             });
         }
     </script>
+ 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const botonMatecito = document.querySelector(".matecito-flotante");
+
+    if (!botonMatecito) return;
+
+    let moviendo = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    botonMatecito.addEventListener("pointerdown", function (e) {
+
+        moviendo = true;
+
+        const rect = botonMatecito.getBoundingClientRect();
+
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        botonMatecito.setPointerCapture(e.pointerId);
+        botonMatecito.style.transition = "none";
+    });
+
+    botonMatecito.addEventListener("pointermove", function (e) {
+
+        if (!moviendo) return;
+
+        let x = e.clientX - offsetX;
+        let y = e.clientY - offsetY;
+
+        /* No permitir que salga de la pantalla */
+
+        const maxX = window.innerWidth - botonMatecito.offsetWidth;
+        const maxY = window.innerHeight - botonMatecito.offsetHeight;
+
+        x = Math.max(0, Math.min(x, maxX));
+        y = Math.max(0, Math.min(y, maxY));
+
+        botonMatecito.style.left = x + "px";
+        botonMatecito.style.top = y + "px";
+
+        botonMatecito.style.right = "auto";
+        botonMatecito.style.bottom = "auto";
+    });
+
+    botonMatecito.addEventListener("pointerup", function () {
+
+        moviendo = false;
+        botonMatecito.style.transition =
+            "transform 0.2s ease, box-shadow 0.2s ease";
+    });
+
+});
+</script>
+
 </body>
 </html>
